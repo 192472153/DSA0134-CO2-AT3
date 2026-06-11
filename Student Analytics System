@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Student
+{
+private:
+    string name;
+    int marks;
+public:
+    void input()
+    {
+        cout << "Enter Name: ";
+        cin >> name;
+        cout << "Enter Marks: ";
+        cin >> marks;
+    }
+    int getMarks()
+    {
+        return marks;
+    }
+
+    string getName()
+    {
+        return name;
+    }
+};
+int main()
+{
+    int depts;
+    cout << "Enter Number of Departments: ";
+    cin >> depts;
+    int overallTop = -1;
+    string overallTopper;
+    for(int i=0;i<depts;i++)
+    {
+        int n;
+        cout << "\nEnter Students in Department " << i+1 << ": ";
+        cin >> n;
+        if(n==0)
+        {
+            cout << "Department Empty\n";
+            continue;
+        }
+        Student s[100];
+        int deptTop=-1, pass=0;
+        string deptTopper;
+        for(int j=0;j<n;j++)
+        {
+            s[j].input();
+            if(s[j].getMarks() >= 50)
+                pass++;
+            if(s[j].getMarks() > deptTop)
+            {
+                deptTop = s[j].getMarks();
+                deptTopper = s[j].getName();
+            }
+        }
+        cout << "\nDepartment Topper: "
+             << deptTopper << " (" << deptTop << ")\n";
+        cout << "Pass Percentage: "
+             << (pass*100.0)/n << "%\n";
+        if(deptTop > overallTop)
+        {
+            overallTop = deptTop;
+            overallTopper = deptTopper;
+        }
+    }
+    cout << "\nUniversity Topper: "
+         << overallTopper << " (" << overallTop << ")\n";
+    return 0;
+}
+
+Output:
+Enter Number of Departments: 2
+
+Enter Students in Department 1: 3
+Enter Name: Arun
+Enter Marks: 85
+Enter Name: Ravi
+Enter Marks: 78
+Enter Name: Karthik
+Enter Marks: 89
+
+Department Topper: Karthik (89)
+Pass Percentage: 100%
+
+Enter Students in Department 2: 2
+Enter Name: Hemanth
+Enter Marks: 78
+Enter Name: Vignesh
+Enter Marks: 90
+
+Department Topper: Vignesh (90)
+Pass Percentage: 100%
+
+University Topper: Vignesh (90)
